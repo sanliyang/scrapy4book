@@ -1,1 +1,1 @@
-# scrapy4chinanews
+# scrapy4book
