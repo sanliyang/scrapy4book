@@ -6,7 +6,13 @@
 import scrapy
 
 
-class QidianSpiderItem(scrapy.Item):
+class QidianInfoSpiderItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    info_type_text = scrapy.Field()
+    info_type_title = scrapy.Field()
+    info_type_url = scrapy.Field()
+    info_type_count = scrapy.Field()
+    spider_name = scrapy.Field()
+    spider_datetime = scrapy.Field()
+
