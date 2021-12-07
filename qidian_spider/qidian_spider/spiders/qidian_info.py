@@ -38,15 +38,16 @@ class QidianInfoSpider(scrapy.Spider):
         self.log("parase_type is called......")
         items = QidianTypeSpiderItem()
         bs_obj = BeautifulSoup(response.body, "lxml")
-        try:
+        div_obj = bs_obj.find('div', {
+            "class": "sub-type-wrap"
+        })
+        if div_obj is None:
             div_obj = bs_obj.find('div', {
-                "class": "sub-type-wrap"
+                "class": "main-nav-wrap"
             })
-            a_list_sim_type = div_obj.find_all('a')
-            for a_sim_type in a_list_sim_type:
-                items["info_type_text"] = info_type_text
-                items["type_title"] = a_sim_type.text
-                items["type_url"] = a_sim_type.get("href")[2:]
-                yield items
-        except Exception as error:
-            self.log(error)
+        a_list_sim_type = div_obj.find_all('a')
+        for a_sim_type in a_list_sim_type:
+            items["info_type_text"] = info_type_text
+            items["type_title"] = a_sim_type.text
+            items["type_url"] = parse.urljoin('https:', a_sim_type.get("href"))
+            yield items
