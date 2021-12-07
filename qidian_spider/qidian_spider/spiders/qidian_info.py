@@ -20,6 +20,7 @@ class QidianInfoSpider(scrapy.Spider):
         dd_list = div_obj.find_all('dd')
         base_url = self.start_urls[0]
         items = QidianInfoSpiderItem()
+        self.log("页面解析中.............")
         for dd_obj in dd_list:
             a_obj = dd_obj.a
             items["info_type_text"] = a_obj.i.text

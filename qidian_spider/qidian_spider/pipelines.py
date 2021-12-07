@@ -5,9 +5,13 @@
 
 
 # useful for handling different item types with a single interface
+from elasticsearch import Elasticsearch
 from itemadapter import ItemAdapter
 
 
 class QidianSpiderPipeline:
+
     def process_item(self, item, spider):
+        es = Elasticsearch()
+        es.index("小说类型", document=ItemAdapter(item).asdict())
         return item
