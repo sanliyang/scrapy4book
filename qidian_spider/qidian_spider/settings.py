@@ -64,6 +64,7 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'qidian_spider.pipelines.QidianSpiderPipeline': 300,
+   'qidian_spider.pipelines.QidianTypeSiderPipeline': 301,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

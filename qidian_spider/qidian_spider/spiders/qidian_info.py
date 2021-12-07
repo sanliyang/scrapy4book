@@ -1,8 +1,9 @@
 import scrapy
 from bs4 import BeautifulSoup
 from urllib import parse
-from ..items import QidianInfoSpiderItem
+from ..items import QidianInfoSpiderItem, QidianTypeSpiderItem
 import time
+from scrapy.http import Request
 
 
 class QidianInfoSpider(scrapy.Spider):
@@ -30,3 +31,22 @@ class QidianInfoSpider(scrapy.Spider):
             items["spider_name"] = self.name
             items["spider_datetime"] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             yield items
+            yield Request(url=items["info_type_url"], callback=self.parse_type, meta={"info_type_text": items["info_type_text"]})
+
+    def parse_type(self, response):
+        info_type_text = response.meta["info_type_text"]
+        self.log("parase_type is called......")
+        items = QidianTypeSpiderItem()
+        bs_obj = BeautifulSoup(response.body, "lxml")
+        try:
+            div_obj = bs_obj.find('div', {
+                "class": "sub-type-wrap"
+            })
+            a_list_sim_type = div_obj.find_all('a')
+            for a_sim_type in a_list_sim_type:
+                items["info_type_text"] = info_type_text
+                items["type_title"] = a_sim_type.text
+                items["type_url"] = a_sim_type.get("href")[2:]
+                yield items
+        except Exception as error:
+            self.log(error)

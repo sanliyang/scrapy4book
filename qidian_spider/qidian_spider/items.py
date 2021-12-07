@@ -16,3 +16,10 @@ class QidianInfoSpiderItem(scrapy.Item):
     spider_name = scrapy.Field()
     spider_datetime = scrapy.Field()
 
+
+class QidianTypeSpiderItem(scrapy.Item):
+    info_type_text = scrapy.Field()
+    type_title = scrapy.Field()
+    type_url = scrapy.Field()
+
+
