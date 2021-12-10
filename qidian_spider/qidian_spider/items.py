@@ -23,3 +23,20 @@ class QidianTypeSpiderItem(scrapy.Item):
     type_url = scrapy.Field()
 
 
+class QidianBookMsgSpiderItem(scrapy.Item):
+    type_title = scrapy.Field()
+    book_url = scrapy.Field()
+    book_name = scrapy.Field()
+    book_count = scrapy.Field()
+    author_name = scrapy.Field()
+    book_classifi = scrapy.Field()
+    book_description = scrapy.Field()
+    book_status = scrapy.Field()
+
+
+class QidianBookChapterMsgSpiderItem(scrapy.Item):
+    book_name = scrapy.Field()
+    volum_name = scrapy.Field()
+    chapters_name = scrapy.Field()
+    chapters_url = scrapy.Field()
+    chapters_msg = scrapy.Field()

@@ -1,0 +1,7 @@
+Scrapy~=2.5.1
+requests~=2.26.0
+bs4~=0.0.1
+beautifulsoup4~=4.10.0
+fonttools~=4.28.3
+elasticsearch~=7.15.2
+itemadapter~=0.4.0
